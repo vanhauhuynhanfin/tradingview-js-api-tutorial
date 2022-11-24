@@ -1,4 +1,5 @@
-var rp = require('request-promise').defaults({json: true})
+var rp = require('request-promise').defaults({json: true});
+let first = true;
 
 const api_root = 'https://min-api.cryptocompare.com'
 const history = {}
@@ -6,7 +7,18 @@ const history = {}
 export default {
 	history: history,
 
-    getBars: function(symbolInfo, resolution, from, to, first, limit) {
+    getBars: function(symbolInfo, resolution, from, to, limit) {
+		// console.log("symbol info: ", symbolInfo);
+		// console.log("resolution: ", resolution);
+		// console.log("periodParams: ", periodParams);
+		// console.log("back: ", onHistoryCallback);
+		// console.log("error", onErrorCallback);
+		// console.log("a:", a);
+		// console.log("b: ", b);
+		// const limit = 2000;
+		// const from = periodParams.from;
+		// const to = periodParams.to;
+		// const to = 1669309898;
 		var split_symbol = symbolInfo.name.split(/[:/]/)
 			const url = resolution === 'D' ? '/data/histoday' : resolution >= 60 ? '/data/histohour' : '/data/histominute'
 			const qs = {
@@ -14,16 +26,17 @@ export default {
 					fsym: split_symbol[1],
 					tsym: split_symbol[2],
 					toTs:  to ? to : '',
-					limit: limit ? limit : 2000, 
+					limit: 2000, 
 					// aggregate: 1//resolution 
 				}
 			// console.log({qs})
-
+		console.log("rp la gi: ", qs);
         return rp({
                 url: `${api_root}${url}`,
                 qs,
             })
             .then(data => {
+				console.log("data la gi: ", data);
                 console.log({data})
 				if (data.Response && data.Response === 'Error') {
 					console.log('CryptoCompare API error:',data.Message)
@@ -45,8 +58,10 @@ export default {
 							var lastBar = bars[bars.length - 1]
 							history[symbolInfo.name] = {lastBar: lastBar}
 						}
+					console.log("barssss: ", bars);
 					return bars
 				} else {
+					console.log("aaaaaaaaaa");
 					return []
 				}
 			})
