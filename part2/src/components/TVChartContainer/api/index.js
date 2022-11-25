@@ -51,7 +51,10 @@ export default {
 		// onResolveErrorCallback('Not feeling it today')
 
 	},
-	getBars: function(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
+	getBars: function(symbolInfo, resolution, periodParams, onHistoryCallback, onErrorCallback) {
+		const from = periodParams.from;
+		const to = periodParams.to;
+		const firstDataRequest = periodParams.firstDataRequest;
 		console.log('=====getBars running')
 		// console.log('function args',arguments)
 		// console.log(`Requesting bars between ${new Date(from * 1000).toISOString()} and ${new Date(to * 1000).toISOString()}`)

@@ -9,14 +9,14 @@ export default {
 
     getBars: function(symbolInfo, resolution, from, to, limit) {
 		// console.log("symbol info: ", symbolInfo);
-		// console.log("resolution: ", resolution);
+		// console.log("resolution: ", resolutFion);
 		// console.log("periodParams: ", periodParams);
 		// console.log("back: ", onHistoryCallback);
 		// console.log("error", onErrorCallback);
 		// console.log("a:", a);
 		// console.log("b: ", b);
 		// const limit = 2000;
-		// const from = periodParams.from;
+		// const from = perioFdParams.from;
 		// const to = periodParams.to;
 		// const to = 1669309898;
 		var split_symbol = symbolInfo.name.split(/[:/]/)
